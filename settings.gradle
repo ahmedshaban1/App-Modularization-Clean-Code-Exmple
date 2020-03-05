@@ -1,2 +1,3 @@
 rootProject.name='App Modularization example'
 include ':app'
+
