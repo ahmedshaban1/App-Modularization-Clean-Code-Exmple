@@ -1,3 +1,4 @@
 rootProject.name='App Modularization example'
 include ':app'
-
+include ':libraries:common'
+include ':features:splash'

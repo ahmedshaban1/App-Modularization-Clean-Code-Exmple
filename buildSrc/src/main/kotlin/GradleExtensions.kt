@@ -12,11 +12,17 @@ fun DependencyHandler.addTestDependencies() {
     androidTestImplementation(TestLibraryDependency.ESPRESSO)
 }
 
-fun DependencyHandler.sh() {
-    testImplementation(TestLibraryDependency.JUNIT)
-    testImplementation(TestLibraryDependency.KOIN)
-    androidTestImplementation(TestLibraryDependency.JUNIT_ANDROID)
-    androidTestImplementation(TestLibraryDependency.ESPRESSO)
+fun DependencyHandler.commonDevelopmentDependencies() {
+    api(LibraryDependency.APPCOMPAT)
+    api(LibraryDependency.CONSTRAINT)
+    api(LibraryDependency.KOIN)
+    api(LibraryDependency.KOIN_SCOPE)
+    api(LibraryDependency.KOIN_VIEWMODEL)
+    api(LibraryDependency.LIFECYCLEEXTENSIONS)
+    api(LibraryDependency.COREKTX)
+    api(LibraryDependency.LIFECYCLEViewModel)
+
+
 }
 
 /*

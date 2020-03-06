@@ -1,9 +1,13 @@
 plugins {
-    id(GradlePluginId.ANDROID_APP)
+    id(GradlePluginId.ANDROID_LIB)
     id(GradlePluginId.BASE_GRADLE_PLUGIN)
+    id(GradlePluginId.SAFE_ARGS)
 }
 
 dependencies {
+
+    // support
     commonDevelopmentDependencies()
-    implementation(project(FeaturesDependency.Splash))
+
+
 }
