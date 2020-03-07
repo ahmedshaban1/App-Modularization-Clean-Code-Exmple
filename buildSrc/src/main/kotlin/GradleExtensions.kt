@@ -21,6 +21,7 @@ fun DependencyHandler.commonDevelopmentDependencies() {
     api(LibraryDependency.LIFECYCLEEXTENSIONS)
     api(LibraryDependency.COREKTX)
     api(LibraryDependency.LIFECYCLEViewModel)
+  //  api(LibraryDependency.D)
 
 
 }

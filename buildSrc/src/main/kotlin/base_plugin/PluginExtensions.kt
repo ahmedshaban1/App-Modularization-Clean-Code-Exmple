@@ -42,6 +42,10 @@ internal fun Project.configureAndroidApp() =  this.extensions.getByType<AndroidB
             jvmTarget = "1.8"
         }
     }
+
+   dataBinding.isEnabled = true
+
+
 }
 
 internal fun Project.configureDependencies() = this.dependencies {

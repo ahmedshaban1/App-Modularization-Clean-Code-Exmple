@@ -45,6 +45,7 @@ allprojects {
         filter {
             exclude("**/generated/**")
         }
+
     }
 
     plugins.apply(GradlePluginId.DETEKT)
@@ -53,6 +54,7 @@ allprojects {
         config = files("${project.rootDir}/config/detekt.yml")
         parallel = true
     }
+
 }
 
 tasks.register("clean", Delete::class) {
