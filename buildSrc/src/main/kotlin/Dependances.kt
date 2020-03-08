@@ -75,11 +75,11 @@ object LibraryDependency {
         val junit = "4.12"
         val androidTestRunner = "1.1.2-alpha02"
         val espressoCore = "3.2.0-alpha02"
-        val retrofit = "2.5.0"
-        val retrofitCoroutines = "0.9.2"
-        val retrofitGson = "2.4.0"
-        val gson = "2.8.5"
-        val okHttp = "3.12.1"
+        const val retrofit = "2.5.0"
+        const val retrofitCoroutines = "0.9.2"
+        const val retrofitGson = "2.4.0"
+        const val gson = "2.8.5"
+        const val okHttp = "3.12.1"
         val coroutines = "1.1.1"
         val koin = "1.0.2"
         val timber = "4.7.1"
@@ -102,7 +102,8 @@ object LibraryDependency {
     const val APPCOMPAT = "androidx.appcompat:appcompat:${Version.SUPPORT_LIB}"
     const val MATERIAL = "com.google.android.material:material:${Version.SUPPORT_LIB}"
     const val CONSTRAINT = "androidx.constraintlayout:constraintlayout:${Version.CONSTRAINT}"
-    const val NAVIGATION_FRAGMENT = "androidx.navigation:navigation-fragment-ktx:${CoreVersion.NAVIGATION}"
+    const val NAVIGATION_FRAGMENT =
+        "androidx.navigation:navigation-fragment-ktx:${CoreVersion.NAVIGATION}"
     const val NAVIGATION_UI = "androidx.navigation:navigation-ui-ktx:${CoreVersion.NAVIGATION}"
     const val KOIN = "org.koin:koin-android:${Version.KOIN}"
     const val KOIN_VIEWMODEL = "org.koin:koin-androidx-viewmodel:${Version.KOIN}"
@@ -112,11 +113,21 @@ object LibraryDependency {
     const val LIFECYCLEViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Version.lifecycle}"
     const val LIFECYCLEEXTENSIONS = "androidx.lifecycle:lifecycle-extensions:${Version.lifecycle}"
 
+    //retrofit
+    const val RETROFITCOROUTINESADAPTER =
+        "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Version.retrofitCoroutines}"
+    const val GSON = "com.google.code.gson:gson:${Version.gson}"
+    const val RETROFIT = "com.squareup.retrofit2:retrofit:${Version.retrofit}"
+    const val RETROFITGSONADAPTER = "com.squareup.retrofit2:converter-gson:${Version.retrofitGson}"
+    const val HTTPLOGGER = "com.squareup.okhttp3:logging-interceptor:${Version.okHttp}"
+
 
 }
 
 object ModulesDependency {
     const val COMMON = ":libraries:common"
+    const val REMOTE = ":data:remote"
+
 }
 
 object FeaturesDependency {

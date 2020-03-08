@@ -21,9 +21,21 @@ fun DependencyHandler.commonDevelopmentDependencies() {
     api(LibraryDependency.LIFECYCLEEXTENSIONS)
     api(LibraryDependency.COREKTX)
     api(LibraryDependency.LIFECYCLEViewModel)
-  //  api(LibraryDependency.D)
 
+}
 
+fun DependencyHandler.diDependencies() {
+    api(LibraryDependency.KOIN)
+    api(LibraryDependency.KOIN_SCOPE)
+    api(LibraryDependency.KOIN_VIEWMODEL)
+}
+
+fun DependencyHandler.networkDependencies() {
+    api(LibraryDependency.RETROFITCOROUTINESADAPTER)
+    api(LibraryDependency.GSON)
+    api(LibraryDependency.RETROFIT)
+    api(LibraryDependency.RETROFITGSONADAPTER)
+    api(LibraryDependency.HTTPLOGGER)
 }
 
 /*

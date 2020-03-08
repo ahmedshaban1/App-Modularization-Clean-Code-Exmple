@@ -5,8 +5,7 @@ plugins {
 }
 
 dependencies {
-
-    implementation(project(ModulesDependency.COMMON))
-    implementation(project(ModulesDependency.REMOTE))
-
+    //network libs
+    diDependencies()
+    networkDependencies()
 }
