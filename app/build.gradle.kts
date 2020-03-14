@@ -6,4 +6,6 @@ plugins {
 dependencies {
     commonDevelopmentDependencies()
     implementation(project(FeaturesDependency.Splash))
+    implementation(project(ModulesDependency.REMOTE))
+
 }

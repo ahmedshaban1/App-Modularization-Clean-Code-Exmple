@@ -30,7 +30,7 @@ object BuildTypeRelease : BuildType {
 }
 
 object CoreVersion {
-    const val KOTLIN = "1.3.61"
+    const val KOTLIN = "1.3.70"
     const val NAVIGATION = "2.2.0"
     const val ANDROID_GRADLE = "3.5.3"
     const val KTLINT_GRADLE = "9.2.1"
@@ -75,9 +75,9 @@ object LibraryDependency {
         val junit = "4.12"
         val androidTestRunner = "1.1.2-alpha02"
         val espressoCore = "3.2.0-alpha02"
-        const val retrofit = "2.5.0"
+        const val retrofit = "2.6.2"
         const val retrofitCoroutines = "0.9.2"
-        const val retrofitGson = "2.4.0"
+        const val retrofitGson = "2.6.2"
         const val gson = "2.8.5"
         const val okHttp = "3.12.1"
         val coroutines = "1.1.1"
@@ -95,6 +95,8 @@ object LibraryDependency {
         val mockk = "1.9.2"
         val fragmentTest = "1.1.0-alpha06"
         val databinding = "3.3.2"
+        const val coroutines_android_version = "1.3.4"
+
     }
 
     const val KOTLIN_STD = "org.jetbrains.kotlin:kotlin-stdlib:${CoreVersion.KOTLIN}"
@@ -121,6 +123,8 @@ object LibraryDependency {
     const val RETROFITGSONADAPTER = "com.squareup.retrofit2:converter-gson:${Version.retrofitGson}"
     const val HTTPLOGGER = "com.squareup.okhttp3:logging-interceptor:${Version.okHttp}"
 
+    const val coroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Version.coroutines_android_version}"
+    const val coroutines_android =  "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Version.coroutines_android_version}"
 
 }
 

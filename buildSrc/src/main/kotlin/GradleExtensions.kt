@@ -36,6 +36,9 @@ fun DependencyHandler.networkDependencies() {
     api(LibraryDependency.RETROFIT)
     api(LibraryDependency.RETROFITGSONADAPTER)
     api(LibraryDependency.HTTPLOGGER)
+    api(LibraryDependency.coroutines_core)
+    api(LibraryDependency.coroutines_android)
+
 }
 
 /*

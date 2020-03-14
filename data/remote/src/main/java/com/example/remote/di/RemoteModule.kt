@@ -1,6 +1,8 @@
 package com.example.remote.di
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -14,7 +16,13 @@ fun getRemoteModule(baseUrl: String) = module {
             .build()
     }
 
-    factory {
-        HttpLoggingInterceptor().level = HttpLoggingInterceptor.Level.HEADERS
+
+    factory<Interceptor> {
+        HttpLoggingInterceptor()
+            .setLevel(HttpLoggingInterceptor.Level.HEADERS)
     }
+
+    factory { OkHttpClient.Builder().addInterceptor(get()).build() }
+
+
 }
