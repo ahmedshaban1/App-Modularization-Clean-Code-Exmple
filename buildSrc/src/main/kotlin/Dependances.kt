@@ -84,6 +84,7 @@ object LibraryDependency {
         val koin = "1.0.2"
         val timber = "4.7.1"
         const val lifecycle = "2.1.0-alpha04"
+        const val livedata_version = "2.2.0-rc02"
         val nav = "2.0.0"
         val room = "2.1.0-alpha06"
         val recyclerview = "1.0.0"
@@ -114,6 +115,8 @@ object LibraryDependency {
     const val COREKTX = "androidx.core:core-ktx:${Version.coreKtx}"
     const val LIFECYCLEViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Version.lifecycle}"
     const val LIFECYCLEEXTENSIONS = "androidx.lifecycle:lifecycle-extensions:${Version.lifecycle}"
+    const val LIVEDATAKTX = "androidx.lifecycle:lifecycle-livedata-ktx:${Version.livedata_version}"
+
 
     //retrofit
     const val RETROFITCOROUTINESADAPTER =

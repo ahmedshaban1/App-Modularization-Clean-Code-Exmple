@@ -6,6 +6,7 @@ plugins {
 
 dependencies {
     //network libs
+    lifeCycleDependencies()
     diDependencies()
     networkDependencies()
 }

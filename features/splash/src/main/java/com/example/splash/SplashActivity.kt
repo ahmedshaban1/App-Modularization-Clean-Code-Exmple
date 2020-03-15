@@ -6,7 +6,6 @@ import androidx.lifecycle.Observer
 import com.example.common.BaseActivity
 import com.example.splash.databinding.ActivitySplashBinding
 import com.example.splash.presenter.SplashViewModel
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SplashActivity : BaseActivity<ActivitySplashBinding>() {
@@ -22,8 +21,13 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         }
 
 
-        splashViewModel.postsLD.observe(this, Observer {
-            Log.d(TAG, it.size.toString())
+        splashViewModel.postsLD.observe(this, Observer { dataState ->
+           /* if (dataState.loading.isLoading) {
+                Log.d(TAG, "Loading state")
+            } else if (
+                dataState.data != null) {
+                Log.d(TAG, "we have data")
+            }*/
         })
 
 

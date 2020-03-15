@@ -19,7 +19,6 @@ class SplashViewModel(val splashRepository: SplashRepository) : ViewModel() {
     fun getBlogPosts(){
         viewModelScope.launch {
             splashRepository.getFoo()
-                .onEach { action-> }
                 .catch {case ->
                     Log.d("sssss",case.message)
                 }

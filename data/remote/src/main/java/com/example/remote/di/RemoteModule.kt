@@ -19,7 +19,7 @@ fun getRemoteModule(baseUrl: String) = module {
 
     factory<Interceptor> {
         HttpLoggingInterceptor()
-            .setLevel(HttpLoggingInterceptor.Level.HEADERS)
+            .setLevel(HttpLoggingInterceptor.Level.BODY)
     }
 
     factory { OkHttpClient.Builder().addInterceptor(get()).build() }

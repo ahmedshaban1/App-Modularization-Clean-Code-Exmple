@@ -24,6 +24,15 @@ fun DependencyHandler.commonDevelopmentDependencies() {
 
 }
 
+fun DependencyHandler.lifeCycleDependencies() {
+    api(LibraryDependency.LIFECYCLEEXTENSIONS)
+    api(LibraryDependency.COREKTX)
+    api(LibraryDependency.LIFECYCLEViewModel)
+    api(LibraryDependency.LIVEDATAKTX)
+
+
+}
+
 fun DependencyHandler.diDependencies() {
     api(LibraryDependency.KOIN)
     api(LibraryDependency.KOIN_SCOPE)
