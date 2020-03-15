@@ -1,10 +1,8 @@
 package com.example.splash.presenter
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.example.remote.data.Resource
 import com.example.splash.data.BlogPost
 import com.example.splash.data.SplashRepository
 import kotlinx.coroutines.flow.catch
@@ -14,17 +12,15 @@ import kotlinx.coroutines.launch
 
 class SplashViewModel(val splashRepository: SplashRepository) : ViewModel() {
 
-    private val _posts = MutableLiveData<List<BlogPost>>()
-    val postsLD: LiveData<List<BlogPost>> get() = _posts
+    private val _posts = MutableLiveData<Resource<List<BlogPost>>>()
+    val postsLD: LiveData<Resource<List<BlogPost>>> get() = _posts
     fun getBlogPosts(){
+       // postsLD = splashRepository.getPosts()?.asLiveData()
         viewModelScope.launch {
-            splashRepository.getFoo()
-                .catch {case ->
-                    Log.d("sssss",case.message)
-                }
-                .collect{items->
-                    _posts.value = items
-                }
+            splashRepository.getPosts().collect {data->
+                _posts.value = data
+            }
         }
+
     }
 }

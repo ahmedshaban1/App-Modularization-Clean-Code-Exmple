@@ -1,34 +1,74 @@
 package com.example.remote
 
 import android.util.Log
+import com.example.remote.data.Resource
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.*
 
+
+abstract class NetworkBoundResource<T> {
+
+    fun asFlow(): Flow<Resource<T>> = flow {
+
+        if (shouldFetch()) {
+            emit(Resource.loading(data = null))
+            try {
+                val data = fetch()
+                saveFetchResult(data)
+                emit(Resource.success(data = data))
+            } catch (throwable: Throwable) {
+                onFetchFailed(throwable)
+                emit( Resource.error(throwable, null))
+            }
+        } else {
+            Resource.success(data = null)
+        }
+
+
+    }.onStart {
+        emit(Resource.loading(data = null))
+    }
+
+
+    abstract suspend fun fetch(): T
+
+    abstract suspend fun saveFetchResult(data: T)
+
+    open fun onFetchFailed(throwable: Throwable) = Unit
+
+    open fun shouldFetch() = true
+}
+
+/*
 abstract class NetworkBoundResource<ResponseObject, CacheObject>
     (
-    isNetworkAvailable: Boolean, // is their a network connection?
-    isNetworkRequest: Boolean, // is this a network request?
-    shouldCancelIfNoInternet: Boolean, // should this job be cancelled if there is no network?
-    shouldLoadFromCache: Boolean // should the cached data be loaded?
+    val isNetworkAvailable: Boolean, // is their a network connection?
+    val isNetworkRequest: Boolean, // is this a network request?
+    val shouldCancelIfNoInternet: Boolean, // should this job be cancelled if there is no network?
+    val shouldLoadFromCache: Boolean // should the cached data be loaded?
 ) {
 
     private val TAG: String = "AppDebug"
     protected lateinit var job: CompletableJob
     protected lateinit var coroutineScope: CoroutineScope
+    private  var flow: Flow<Resource<ResponseObject>>? = null
 
     init {
         setJob(initNewJob())
+    }
+
+    fun build(): NetworkBoundResource<ResponseObject, CacheObject> {
         // setValue(DataState.loading(isLoading = true, cachedData = null))
 
         if (shouldLoadFromCache) {
             // view cache to start
-            /*val dbSource = loadFromCache()
+            */
+/*val dbSource = loadFromCache()
             result.addSource(dbSource){
                 result.removeSource(dbSource)
                 setValue(DataState.loading(isLoading = true, cachedData = it))
-            }*/
+            }*//*
+
         }
 
         if (isNetworkRequest) {
@@ -48,6 +88,11 @@ abstract class NetworkBoundResource<ResponseObject, CacheObject>
         } else {
             doCacheRequest()
         }
+
+
+        return this
+
+
     }
 
     fun doCacheRequest() {
@@ -56,21 +101,30 @@ abstract class NetworkBoundResource<ResponseObject, CacheObject>
         }
     }
 
+
+
     fun doNetworkRequest() {
         coroutineScope.launch {
 
-            val flow = flow {
+            flow = flow {
+                emit(Resource.loading(data = null))
                 // exectute API call and map to UI object
-                val fooList = createCall()
+                val postList = createCall()
                 // Emit the list to the stream
-                emit(fooList)
-            }.catch { case ->
-                Log.d("sssss", case.message!!)
-            }.collect { items ->
-                handleApiSuccessResponse(items)
+                emit(Resource.success(data = postList))
             }
 
-            /*withContext(Dispatchers.Main) {
+            flow?.catch { case ->
+                Log.d("sssss", case.message!!)
+                emit(Resource.error(data = null, error = case))
+            }?.collect { items ->
+                handleApiSuccessResponse(items)
+                onCompleteJob()
+
+            }
+
+            */
+/*withContext(Dispatchers.Main) {
 
                 // make network call
                 val apiResponse = createCall()
@@ -81,7 +135,8 @@ abstract class NetworkBoundResource<ResponseObject, CacheObject>
                         handleNetworkCall(response)
                     }
                 }
-            }*/
+            }*//*
+
         }
 
         GlobalScope.launch(Dispatchers.IO) {
@@ -92,11 +147,17 @@ abstract class NetworkBoundResource<ResponseObject, CacheObject>
                 //job.cancel(CancellationException(ErrorHandling.UNABLE_TO_RESOLVE_HOST))
             }
         }
+
+
     }
 
-    /*suspend fun handleNetworkCall(response: GenericApiResponse<ResponseObject>){
 
-      *//*  when(response){
+    */
+/*suspend fun handleNetworkCall(response: GenericApiResponse<ResponseObject>){
+
+      *//*
+*/
+/*  when(response){
             is ApiSuccessResponse ->{
                 handleApiSuccessResponse(response)
             }
@@ -109,17 +170,20 @@ abstract class NetworkBoundResource<ResponseObject, CacheObject>
                 onErrorReturn("HTTP 204. Returned NOTHING.", true, false)
             }
         }*//*
-    }*/
+*/
+/*
+    }*//*
 
-    /*fun onCompleteJob(dataState: DataState<ViewStateType>){
+
+    fun onCompleteJob(){
         GlobalScope.launch(Dispatchers.Main) {
             job.complete()
-            setValue(dataState)
         }
-    }*/
+    }
 
     fun onErrorReturn(errorMessage: String?, shouldUseDialog: Boolean, shouldUseToast: Boolean) {
-        /*  var msg = errorMessage
+        */
+/*  var msg = errorMessage
           var useDialog = shouldUseDialog
           var responseType: ResponseType = ResponseType.None()
           if(msg == null){
@@ -136,12 +200,15 @@ abstract class NetworkBoundResource<ResponseObject, CacheObject>
               responseType = ResponseType.Dialog()
           }
 
-          onCompleteJob(DataState.error(Response(msg, responseType)))*/
+          onCompleteJob(DataState.error(Response(msg, responseType)))*//*
+
     }
 
-    /*  fun setValue(dataState: DataState<ViewStateType>){
+    */
+/*  fun setValue(dataState: DataState<ViewStateType>){
           //result.value = dataState
-      }*/
+      }*//*
+
 
     private fun initNewJob(): Job {
         Log.d(TAG, "initNewJob: called.")
@@ -169,9 +236,11 @@ abstract class NetworkBoundResource<ResponseObject, CacheObject>
 
     abstract suspend fun createCacheRequestAndReturn()
 
-    abstract suspend fun handleApiSuccessResponse(response: ResponseObject)
+    abstract suspend fun handleApiSuccessResponse(response: Resource<ResponseObject>)
 
     abstract suspend fun createCall(): ResponseObject
+
+    fun asFlow(): Flow<Resource<ResponseObject>>? = flow
 
     //abstract fun loadFromCache(): LiveData<ViewStateType>
 
@@ -180,4 +249,5 @@ abstract class NetworkBoundResource<ResponseObject, CacheObject>
     abstract fun setJob(job: Job)
 
 }
+*/
 
