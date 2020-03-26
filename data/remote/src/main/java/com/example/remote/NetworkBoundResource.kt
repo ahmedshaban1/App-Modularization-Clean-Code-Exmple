@@ -1,9 +1,12 @@
 package com.example.remote
 
-import android.util.Log
+import com.example.ResultWrapper
 import com.example.remote.data.Resource
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
+import com.example.safeApiCall
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.onStart
 
 
 abstract class NetworkBoundResource<T> {
@@ -11,32 +14,49 @@ abstract class NetworkBoundResource<T> {
     fun asFlow(): Flow<Resource<T>> = flow {
 
         if (shouldFetch()) {
-            emit(Resource.loading(data = null))
-            try {
-                val data = fetch()
-                saveFetchResult(data)
-                emit(Resource.success(data = data))
-            } catch (throwable: Throwable) {
-                onFetchFailed(throwable)
-                emit( Resource.error(throwable, null))
+            if (shouldFetchWithLocalData()) {
+                emit(Resource.loading(data = localFetch()))
+            }
+
+            val results = safeApiCall(dispatcher = Dispatchers.IO) {
+                remoteFetch()
+            }
+
+            when (results) {
+                is ResultWrapper.Success -> {
+                    results.value?.let {
+                        saveFetchResult(results.value)
+                    }
+                    emit(Resource.success(data = results.value))
+                }
+
+                is ResultWrapper.GenericError -> {
+                    emit(Resource.error(data = null, error = Throwable()))
+                }
             }
         } else {
-            Resource.success(data = null)
+            //get from cash
+            emit(Resource.success(data = localFetch()))
         }
 
 
     }.onStart {
+        //get From cache
         emit(Resource.loading(data = null))
     }
 
 
-    abstract suspend fun fetch(): T
+    abstract suspend fun remoteFetch(): T
 
     abstract suspend fun saveFetchResult(data: T)
+
+    abstract suspend fun localFetch(): T
+
 
     open fun onFetchFailed(throwable: Throwable) = Unit
 
     open fun shouldFetch() = true
+    open fun shouldFetchWithLocalData() = false
 }
 
 /*

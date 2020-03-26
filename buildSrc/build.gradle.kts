@@ -1,5 +1,6 @@
 plugins {
     `kotlin-dsl`
+    kotlin("kapt") version "1.3.21"
 }
 
 //The kotlin-dsl plugin requires a repository to be declared

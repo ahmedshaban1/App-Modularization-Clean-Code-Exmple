@@ -1,49 +1,38 @@
 package com.example.splash.data
 
 import android.util.Log
+import com.example.dao.BlogPostDao
+import com.example.model.BlogPost
+import com.example.model.BlogPostApi
 import com.example.remote.NetworkBoundResource
 import com.example.remote.data.Resource
 import kotlinx.coroutines.flow.Flow
 
-class SplashRepository(val api: SplashServices) {
+class SplashRepository(val api: SplashServices, val blogPostDao: BlogPostDao) {
     private val TAG = "SplashRepositoryCall"
 
-    fun getPosts(): Flow<Resource<List<BlogPost>>> {
-        return object : NetworkBoundResource<List<BlogPost>>() {
+    fun getPosts(): Flow<Resource<List<BlogPostApi>>> {
+        return object : NetworkBoundResource<List<BlogPostApi>>() {
+            override suspend fun saveFetchResult(data: List<BlogPostApi>) {
+                if (data.isNotEmpty()) {
+                    data.forEach { blog ->
+                        val id = blogPostDao.insert(BlogPost(blog.pk, blog.title))
+                        Log.d("SplashRepositoryCall", "Blog inserted : $id")
+                    }
 
+                }
 
-            override suspend fun fetch(): List<BlogPost> {
+            }
+
+            override suspend fun remoteFetch(): List<BlogPostApi> {
                 return api.getBlogPost()
             }
 
-            override suspend fun saveFetchResult(data: List<BlogPost>) {
-                Log.e(TAG, data.toString())
+            override suspend fun localFetch(): List<BlogPostApi> {
+                return listOf()
             }
 
         }.asFlow()
-        /* val newtWorkBound = object : NetworkBoundResource<List<BlogPost>, List<BlogPost>>(
-             true,
-             true,
-             true,
-             false
-         ) {
-             override suspend fun createCacheRequestAndReturn() {
-             }
 
-             override fun setJob(job: Job) {
-             }
-
-             override suspend fun createCall(): List<BlogPost> {
-                 return api.getBlogPost()
-             }
-
-
-             override suspend fun handleApiSuccessResponse(response: Resource<List<BlogPost>>) {
-                 Log.e(TAG, response.toString())
-
-             }
-
-         }
-         return newtWorkBound.build().asFlow()*/
     }
 }

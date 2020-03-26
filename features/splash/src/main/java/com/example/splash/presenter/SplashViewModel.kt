@@ -1,23 +1,26 @@
 package com.example.splash.presenter
 
-import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.dao.BlogPostDao
+import com.example.model.BlogPostApi
 import com.example.remote.data.Resource
-import com.example.splash.data.BlogPost
 import com.example.splash.data.SplashRepository
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import com.example.safeApiCall
+
 
 class SplashViewModel(val splashRepository: SplashRepository) : ViewModel() {
 
-    private val _posts = MutableLiveData<Resource<List<BlogPost>>>()
-    val postsLD: LiveData<Resource<List<BlogPost>>> get() = _posts
-    fun getBlogPosts(){
-       // postsLD = splashRepository.getPosts()?.asLiveData()
+
+    private val _posts = MutableLiveData<Resource<List<BlogPostApi>>>()
+    val postsLD: LiveData<Resource<List<BlogPostApi>>> get() = _posts
+    fun getBlogPosts() {
         viewModelScope.launch {
-            splashRepository.getPosts().collect {data->
+            splashRepository.getPosts().collect { data ->
                 _posts.value = data
             }
         }

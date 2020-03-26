@@ -50,6 +50,15 @@ fun DependencyHandler.networkDependencies() {
 
 }
 
+
+fun DependencyHandler.localRoomDependencies() {
+    kapt(LibraryDependency.roomCompiler)
+    api(LibraryDependency.roomKtx)
+    api(LibraryDependency.roomRunTime)
+
+
+}
+
 /*
  * These extensions mimic the extensions that are generated on the fly by Gradle.
  * They are used here to provide above dependency syntax that mimics Gradle Kotlin DSL syntax in module\build.gradle.kts.kts files.

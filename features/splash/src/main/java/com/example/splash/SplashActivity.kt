@@ -30,6 +30,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                 }
 
                 if(dataState.status == Resource.Status.SUCCESS){
+                    binding.loader.visibility = View.GONE
                     binding.centerTextTv.text = dataState.data?.get(0)?.title
                 }
             }

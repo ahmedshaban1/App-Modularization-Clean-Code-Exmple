@@ -10,7 +10,7 @@ import retrofit2.Retrofit
 val splashModule = module {
     viewModel { SplashViewModel(get()) }
     factory {
-        SplashRepository(get())
+        SplashRepository(get(),get())
     }
 
     single {

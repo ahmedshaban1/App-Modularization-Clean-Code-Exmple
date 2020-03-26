@@ -1,5 +1,6 @@
 package com.example.splash.data
 
+import com.example.model.BlogPostApi
 import kotlinx.coroutines.flow.Flow
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -7,7 +8,6 @@ import retrofit2.http.POST
 
 interface SplashServices {
     @GET("placeholder/blogs")
-    suspend fun getBlogPost(): List<BlogPost>
+    suspend fun getBlogPost(): List<BlogPostApi>
 }
 
-data class BlogPost(val pk:String,val title:String)

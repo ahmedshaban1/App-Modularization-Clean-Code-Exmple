@@ -36,6 +36,7 @@ object CoreVersion {
     const val KTLINT_GRADLE = "9.2.1"
     const val KTLINT = "0.34.2"
     const val DETEKT = "1.0.0"
+    const val KAPT = "1.3.71"
 }
 
 object GradlePluginId {
@@ -48,6 +49,7 @@ object GradlePluginId {
     const val KTLINT_GRADLE = "org.jlleitschuh.gradle.ktlint"
     const val KTLINT_MAVEN = "https://plugins.gradle.org/m2/"
     const val DETEKT = "io.gitlab.arturbosch.detekt"
+    const val KAPT = "kotlin-kapt"
 }
 
 object GradleClasspath {
@@ -86,7 +88,7 @@ object LibraryDependency {
         const val lifecycle = "2.1.0-alpha04"
         const val livedata_version = "2.2.0-rc02"
         val nav = "2.0.0"
-        val room = "2.1.0-alpha06"
+        const val room = "2.1.0-alpha06"
         val recyclerview = "1.0.0"
         val safeArgs = "2.1.0-alpha01"
         val glide = "4.9.0"
@@ -129,11 +131,19 @@ object LibraryDependency {
     const val coroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Version.coroutines_android_version}"
     const val coroutines_android =  "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Version.coroutines_android_version}"
 
+    //room
+
+    const val roomCompiler = "androidx.room:room-compiler:${Version.room}"
+    const val roomRunTime = "androidx.room:room-runtime:${Version.room}"
+    const val roomKtx = "androidx.room:room-ktx:${Version.room}"
+
 }
 
 object ModulesDependency {
     const val COMMON = ":libraries:common"
     const val REMOTE = ":data:remote"
+    const val MODEL = ":data:model"
+    const val LOCAL = ":data:local"
 
 }
 
