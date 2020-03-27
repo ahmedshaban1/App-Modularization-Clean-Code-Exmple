@@ -27,6 +27,9 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
             dataState?.let {
                 if(dataState.status == Resource.Status.LOADING){
                     binding.loader.visibility = View.VISIBLE
+                    dataState.data?.let {
+                        binding.loadingData.text = dataState.data?.get(0)?.title
+                    }
                 }
 
                 if(dataState.status == Resource.Status.SUCCESS){

@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 
 @Entity(tableName = "BlogPosts")
-data class BlogPost(@PrimaryKey val pk: String, val title: String)
+data class BlogPostApi(@PrimaryKey val pk: String, val title: String)
 
 
-data class BlogPostApi(val pk: String, val title: String)
+data class BlogPost(val pk: String, val title: String)
