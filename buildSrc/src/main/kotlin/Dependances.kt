@@ -93,12 +93,13 @@ object LibraryDependency {
         val safeArgs = "2.1.0-alpha01"
         val glide = "4.9.0"
         val mockwebserver = "2.7.5"
-        val archCoreTest = "2.0.0"
+        const val archCoreTest = "2.1.0"
         val androidJunit = "1.1.0"
-        val mockk = "1.9.2"
+        const val mockk = "1.9.2"
         val fragmentTest = "1.1.0-alpha06"
         val databinding = "3.3.2"
         const val coroutines_android_version = "1.3.4"
+        const val COROUTINESTESTING="1.3.2"
 
     }
 
@@ -136,6 +137,15 @@ object LibraryDependency {
     const val roomCompiler = "androidx.room:room-compiler:${Version.room}"
     const val roomRunTime = "androidx.room:room-runtime:${Version.room}"
     const val roomKtx = "androidx.room:room-ktx:${Version.room}"
+
+    //testing mockk
+
+    const val MOCKkANDROIDTESTING  = "io.mockk:mockk-android:${Version.mockk}"
+    const val MOCKKTESTING   = "io.mockk:mockk:${Version.mockk}"
+
+    const val COROUTINESTESTING  = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Version.COROUTINESTESTING}"
+    const val LIFECYCLETESTING = "androidx.arch.core:core-testing:${Version.archCoreTest}"
+
 
 }
 

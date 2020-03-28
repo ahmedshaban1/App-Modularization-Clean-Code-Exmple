@@ -13,6 +13,8 @@ dependencies {
     implementation(project(ModulesDependency.MODEL))
     implementation(project(ModulesDependency.LOCAL))
 
+    addTestDependencies()
+
 
 
 }

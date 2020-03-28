@@ -10,6 +10,11 @@ fun DependencyHandler.addTestDependencies() {
     testImplementation(TestLibraryDependency.KOIN)
     androidTestImplementation(TestLibraryDependency.JUNIT_ANDROID)
     androidTestImplementation(TestLibraryDependency.ESPRESSO)
+    testImplementation(LibraryDependency.MOCKKTESTING)
+    androidTestImplementation(LibraryDependency.MOCKkANDROIDTESTING)
+    testImplementation(LibraryDependency.COROUTINESTESTING)
+    testImplementation(LibraryDependency.LIFECYCLETESTING)
+
 }
 
 fun DependencyHandler.commonDevelopmentDependencies() {
@@ -55,9 +60,8 @@ fun DependencyHandler.localRoomDependencies() {
     kapt(LibraryDependency.roomCompiler)
     api(LibraryDependency.roomKtx)
     api(LibraryDependency.roomRunTime)
-
-
 }
+
 
 /*
  * These extensions mimic the extensions that are generated on the fly by Gradle.
