@@ -31,11 +31,11 @@ class SplashRepositoryTest {
     var dao = spyk<BlogPostDao>()
     var blogLocalDataSource = spyk(BlogPostLocalImpl(dao))
     var remoteDataSource = spyk(BlogPostRemoteImpl(api))
-    private lateinit var observer: Observer<Resource<List<BlogPostApi>>>
+    private lateinit var collector: FlowCollector<Resource<List<BlogPostApi>>>
 
     @Before
     fun setUp() {
-        observer = mockk(relaxed = true)
+        collector = mockk(relaxed = true)
         SUT = SplashRepository(remoteDataSource, blogLocalDataSource)
     }
 
@@ -46,13 +46,13 @@ class SplashRepositoryTest {
         coEvery { remoteDataSource.getBlogPosts() } returns fakePosts
         coEvery { blogLocalDataSource.getBlogPosts() } returns fakePosts
         runBlocking {
-            SUT.getPosts().asLiveData().observeForever(observer)
+            SUT.getPosts().collect(collector)
         }
 
-        verifyOrder {
-            observer.onChanged(Resource.loading(null))
-            observer.onChanged(Resource.loading(data = fakePosts))
-            observer.onChanged(Resource.success(data = fakePosts))
+        coVerifyOrder {
+            collector.emit(Resource.loading(null))
+            collector.emit(Resource.loading(data = fakePosts))
+            collector.emit(Resource.success(data = fakePosts))
         }
     }
 
