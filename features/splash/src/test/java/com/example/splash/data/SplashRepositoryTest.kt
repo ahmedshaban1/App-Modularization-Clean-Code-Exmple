@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
 import com.example.CoroutinesMainDispatcherRule
 import com.example.dao.BlogPostDao
+import com.example.model.BlogPost
 import com.example.model.BlogPostApi
 import com.example.remote.data.Resource
 import com.example.splash.data.datasource.local.BlogPostLocalImpl
@@ -42,7 +43,7 @@ class SplashRepositoryTest {
     @Test
     fun getBlogsAndSuccess() {
         //arrange
-        val fakePosts = FakeData.createFakePots(10)
+        val fakePosts = FakeData.createFakePostsApi(10)
         coEvery { remoteDataSource.getBlogPosts() } returns fakePosts
         coEvery { blogLocalDataSource.getBlogPosts() } returns fakePosts
         runBlocking {
@@ -58,14 +59,26 @@ class SplashRepositoryTest {
 
 
     object FakeData {
-        fun createFakePots(count: Int): List<BlogPostApi> {
+        fun createFakePostsApi(count: Int): List<BlogPostApi> {
             return (0 until count).map {
-                createFakeUser(it.toString())
+                createFakePostApi(it.toString())
             }
         }
 
-        fun createFakeUser(id: String): BlogPostApi {
+        fun createFakePostApi(id: String): BlogPostApi {
             return BlogPostApi(pk = id, title = "title$id")
+
+        }
+
+
+        fun createFakePosts(count: Int): List<BlogPost> {
+            return (0 until count).map {
+                createFakePost(it.toString())
+            }
+        }
+
+        fun createFakePost(id: String): BlogPost {
+            return BlogPost(pk = id, title = "title$id")
 
         }
 
