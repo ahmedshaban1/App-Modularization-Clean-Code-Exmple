@@ -1,12 +1,12 @@
 package com.example.splash.domain
 
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.switchMap
 import com.example.model.BlogPost
 import com.example.model.BlogPostApi
 import com.example.remote.data.Resource
 import com.example.splash.data.SplashRepository
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flow
 
 class GetBlogPostsUseCase(val repo: SplashRepository) {
     fun getPosts(): Flow<Resource<List<BlogPost>>> {
