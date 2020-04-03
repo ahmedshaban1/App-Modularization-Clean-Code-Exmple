@@ -16,7 +16,6 @@ sealed class ResultWrapper<out T> {
     data class GenericError(val code: Int? = null, val error: String? = null) : ResultWrapper<Nothing>()
 }
 
-private val TAG: String = "AppDebug"
 
 
 suspend fun <T> safeApiCall(

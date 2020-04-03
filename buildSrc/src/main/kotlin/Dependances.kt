@@ -160,6 +160,7 @@ object ModulesDependency {
 object FeaturesDependency {
     const val prefix = ":features:"
     const val Splash = "${prefix}splash"
+    const val Home = "${prefix}home"
 }
 
 object TestLibraryDependency {
