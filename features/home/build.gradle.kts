@@ -12,6 +12,7 @@ dependencies {
     implementation(project(ModulesDependency.REMOTE))
     implementation(project(ModulesDependency.MODEL))
     implementation(project(ModulesDependency.LOCAL))
+    implementation(project(ModulesDependency.UI))
 
     addTestDependencies()
 

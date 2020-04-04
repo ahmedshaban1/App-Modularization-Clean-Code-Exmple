@@ -89,7 +89,7 @@ object LibraryDependency {
         const val livedata_version = "2.2.0-rc02"
         val nav = "2.0.0"
         const val room = "2.1.0-alpha06"
-        val recyclerview = "1.0.0"
+        const val recyclerview = "1.0.0"
         val safeArgs = "2.1.0-alpha01"
         val glide = "4.9.0"
         val mockwebserver = "2.7.5"
@@ -100,6 +100,7 @@ object LibraryDependency {
         val databinding = "3.3.2"
         const val coroutines_android_version = "1.3.4"
         const val COROUTINESTESTING="1.3.2"
+        const val PICASSO = "2.71828"
 
     }
 
@@ -114,6 +115,8 @@ object LibraryDependency {
     const val KOIN = "org.koin:koin-android:${Version.KOIN}"
     const val KOIN_VIEWMODEL = "org.koin:koin-androidx-viewmodel:${Version.KOIN}"
     const val KOIN_SCOPE = "org.koin:koin-androidx-scope:${Version.KOIN}"
+    const val PICASSO = "com.squareup.picasso:picasso:${Version.PICASSO}"
+    const val RECYCLERVIEW = "androidx.recyclerview:recyclerview:${Version.recyclerview}"
 
     const val COREKTX = "androidx.core:core-ktx:${Version.coreKtx}"
     const val LIFECYCLEViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Version.lifecycle}"
@@ -154,6 +157,7 @@ object ModulesDependency {
     const val REMOTE = ":data:remote"
     const val MODEL = ":data:model"
     const val LOCAL = ":data:local"
+    const val UI = ":libraries:uicomponents"
 
 }
 

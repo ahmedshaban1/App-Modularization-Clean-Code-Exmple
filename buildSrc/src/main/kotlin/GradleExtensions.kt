@@ -20,6 +20,8 @@ fun DependencyHandler.addTestDependencies() {
 fun DependencyHandler.commonDevelopmentDependencies() {
     api(LibraryDependency.APPCOMPAT)
     api(LibraryDependency.CONSTRAINT)
+    api(LibraryDependency.PICASSO)
+    api(LibraryDependency.RECYCLERVIEW)
     api(LibraryDependency.KOIN)
     api(LibraryDependency.KOIN_SCOPE)
     api(LibraryDependency.KOIN_VIEWMODEL)
