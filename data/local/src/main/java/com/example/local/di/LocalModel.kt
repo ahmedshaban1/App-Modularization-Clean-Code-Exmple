@@ -8,5 +8,7 @@ val localModule = module {
 
     single { AppDatabase.buildDatabase(androidContext()) }
     factory { get<AppDatabase>().blogPostDao() }
+    factory { get<AppDatabase>().productDao() }
+    factory { get<AppDatabase>().categoryDao() }
 
 }
