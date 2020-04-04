@@ -101,6 +101,7 @@ object LibraryDependency {
         const val coroutines_android_version = "1.3.4"
         const val COROUTINESTESTING="1.3.2"
         const val PICASSO = "2.71828"
+        const val ROUNDED_IMAGE = "2.3.0"
 
     }
 
@@ -111,6 +112,8 @@ object LibraryDependency {
     const val CONSTRAINT = "androidx.constraintlayout:constraintlayout:${Version.CONSTRAINT}"
     const val NAVIGATION_FRAGMENT =
         "androidx.navigation:navigation-fragment-ktx:${CoreVersion.NAVIGATION}"
+
+    const val ROUNDED_IMAGE_VIEW = "com.makeramen:roundedimageview:${Version.ROUNDED_IMAGE}"
     const val NAVIGATION_UI = "androidx.navigation:navigation-ui-ktx:${CoreVersion.NAVIGATION}"
     const val KOIN = "org.koin:koin-android:${Version.KOIN}"
     const val KOIN_VIEWMODEL = "org.koin:koin-androidx-viewmodel:${Version.KOIN}"

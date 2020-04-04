@@ -21,6 +21,7 @@ fun DependencyHandler.commonDevelopmentDependencies() {
     api(LibraryDependency.APPCOMPAT)
     api(LibraryDependency.CONSTRAINT)
     api(LibraryDependency.PICASSO)
+    api(LibraryDependency.ROUNDED_IMAGE_VIEW)
     api(LibraryDependency.RECYCLERVIEW)
     api(LibraryDependency.KOIN)
     api(LibraryDependency.KOIN_SCOPE)
