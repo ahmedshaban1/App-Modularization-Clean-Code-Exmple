@@ -9,14 +9,13 @@ import com.example.home.R
 import com.example.home.data.HomeSection
 import com.example.uicomponents.helpers.inflate
 import kotlinx.android.synthetic.main.category_item.view.*
-import kotlinx.android.synthetic.main.home_inner_view_item.view.*
 import kotlinx.android.synthetic.main.product_item.view.*
 
 class HomeInnerAdapter(val section: HomeSection) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)  : RecyclerView.ViewHolder{
-        when(section.viewType){
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        when (section.viewType) {
             Constants.PRODUCT_VIEW_TYPE -> return ProductViewHolder(parent.inflate(R.layout.product_item))
-            else->{
+            else -> {
                 return CategoryViewHolder(parent.inflate(R.layout.category_item))
             }
         }
@@ -25,16 +24,14 @@ class HomeInnerAdapter(val section: HomeSection) : RecyclerView.Adapter<Recycler
     override fun getItemCount(): Int {
         section.categories?.let {
             return it.size
-        }?: kotlin.run {
-            return  section.products?.size!!
+        } ?: kotlin.run {
+            return section.products?.size!!
         }
-
-
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when(holder){
-            is CategoryViewHolder ->{
+        when (holder) {
+            is CategoryViewHolder -> {
                 val item = section.categories?.get(position)
                 holder.itemView.categoryView.apply {
                     item?.let {
@@ -45,7 +42,7 @@ class HomeInnerAdapter(val section: HomeSection) : RecyclerView.Adapter<Recycler
                 }
 
             }
-            is ProductViewHolder ->{
+            is ProductViewHolder -> {
                 val item = section.products?.get(position)
                 holder.itemView.productView.apply {
                     item?.let {
@@ -59,7 +56,22 @@ class HomeInnerAdapter(val section: HomeSection) : RecyclerView.Adapter<Recycler
         }
     }
 
-    class CategoryViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView)
-    class ProductViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView)
+    class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
+
+    fun updateSection(updatedSection: HomeSection) {
+
+        updatedSection.categories?.let {
+            section.categories?.clear()
+            section.categories?.addAll(it)
+        }
+        updatedSection.products?.let {
+            section.products?.clear()
+            section.products?.addAll(it)
+        }
+
+        notifyDataSetChanged()
+    }
 
 }

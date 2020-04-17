@@ -10,37 +10,37 @@ class HomeLocalImpl(val productDao: ProductDao, val categoryDao: CategoryDao) : 
         val cats = categoryDao.getAll()
         if (cats.isNotEmpty()) {
             val catsSection =
-                HomeSection(title = "Categories", categories = cats, viewType = "category")
+                HomeSection(title = "Categories", categories = cats.toMutableList(), viewType = "category")
             list.add(catsSection)
         }
         val allProducts  = productDao.getAll()
         allProducts.filter { item-> item.isFeatured!! }.let {
             val section =
-                HomeSection(title = "Featured", products = it, viewType = "product")
+                HomeSection(title = "Featured", products = it.toMutableList(), viewType = "product")
             list.add(section)
         }
 
         allProducts.filter { item-> item.isBestSell!! }.let {
             val section =
-                HomeSection(title = "Best Sell", products = it, viewType = "product")
+                HomeSection(title = "Best Sell", products = it.toMutableList(), viewType = "product")
             list.add(section)
         }
 
         allProducts.filter { item-> item.isMastRated!! }.let {
             val section =
-                HomeSection(title = "Mast Rated", products = it, viewType = "product")
+                HomeSection(title = "Mast Rated", products = it.toMutableList(), viewType = "product")
             list.add(section)
         }
 
         allProducts.filter { item-> item.isMastVisited!! }.let {
             val section =
-                HomeSection(title = "Mast Visited", products = it, viewType = "product")
+                HomeSection(title = "Mast Visited", products = it.toMutableList(), viewType = "product")
             list.add(section)
         }
 
         allProducts.filter { item-> item.isRecommended!! }.let {
             val section =
-                HomeSection(title = "Recommend for you", products = it, viewType = "product")
+                HomeSection(title = "Recommend for you", products = it.toMutableList(), viewType = "product")
             list.add(section)
         }
         return list

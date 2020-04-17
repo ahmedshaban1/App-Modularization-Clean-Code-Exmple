@@ -7,6 +7,6 @@ import com.google.gson.annotations.SerializedName
 data class HomeSection(
     val title: String,
     @SerializedName("view_type") val viewType: String,
-    var categories: List<Category>? = null,
-    var products: List<Product>? = null
+    var categories: MutableList<Category>? = null,
+    var products: MutableList<Product>? = null
 )

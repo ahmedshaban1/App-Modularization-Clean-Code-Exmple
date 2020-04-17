@@ -11,7 +11,7 @@ import org.koin.core.context.startKoin
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-        val list = listOf(splashModule,getRemoteModule("http://192.168.1.4:80/blog/public/api/"), localModule,
+        val list = listOf(splashModule,getRemoteModule("http://192.168.1.6/blog/public/api/"), localModule,
             homeModule
         )
         startKoin {
