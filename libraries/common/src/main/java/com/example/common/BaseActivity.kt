@@ -5,9 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 
-//todo adding viewmodel as genaric type t
-// adding databinding  as generic Type b
 abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
+
     private lateinit var currentViewBinding: B
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +23,18 @@ abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
     fun hideLoading() {
         //todo impl hide loading feature
     }
+
+    fun handleMessages(messageType:MessageType){
+        val message   =  ErrorMessageHelper.getMessage(messageType.code)
+        when(messageType){
+            is MessageType.SnackBar->{
+                showSnackbar(message)
+            }
+        }
+
+    }
+
+
 
     //all of this function needs future impl
 

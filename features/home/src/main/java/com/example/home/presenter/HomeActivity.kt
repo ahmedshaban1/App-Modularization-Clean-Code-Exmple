@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer
 import com.example.common.BaseActivity
 import com.example.home.R
 import com.example.home.databinding.ActivityHomeBinding
+import com.example.remote.data.Resource
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -19,8 +20,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     }
 
     private fun initObservables() {
-        viewModel.homeSectionsLD.observe(this, Observer { data ->
-
+        viewModel.homeSectionsLD.observe(this, Observer {
+            if(it.status == Resource.Status.ERROR){
+                it.messageType?.let { it1 -> handleMessages(it1) }
+            }
         })
 
         viewModel.gethome()

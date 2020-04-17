@@ -16,7 +16,7 @@ class GetBlogPostsUseCase(val repo: SplashRepository) {
     suspend fun map(data: Resource<List<BlogPostApi>>): Flow<Resource<List<BlogPost>>> {
         return flow {
             val list = data.data?.map { BlogPost(it.pk, title = it.title) }
-            emit(Resource(status = data.status, data = list, error = data.error))
+            emit(Resource(status = data.status, data = list, messageType = data.messageType))
         }
     }
 }

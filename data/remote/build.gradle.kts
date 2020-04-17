@@ -7,6 +7,8 @@ plugins {
 }
 
 dependencies {
+    implementation(project(ModulesDependency.COMMON))
+
     //network libs
     lifeCycleDependencies()
     diDependencies()

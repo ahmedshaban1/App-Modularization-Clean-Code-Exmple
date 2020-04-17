@@ -1,6 +1,10 @@
 package com.example
 
-import com.example.remote.R
+import com.example.common.MessageType
+import com.example.common.MessageType.Dialog
+import com.example.common.MessageType.SnackBar
+import com.example.common.NetworkCodes
+import com.example.common.NetworkCodes.GENERAL_ERROR
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.TimeoutCancellationException
@@ -13,8 +17,10 @@ import java.io.IOException
 
 sealed class ResultWrapper<out T> {
     data class Success<out T>(val value: T) : ResultWrapper<T>()
-    data class GenericError(val code: Int? = null, val error: String? = null) : ResultWrapper<Nothing>()
+    data class GenericError(val messagType: MessageType) : ResultWrapper<Nothing>()
 }
+
+
 
 
 
@@ -30,23 +36,22 @@ suspend fun <T> safeApiCall(
             throwable.printStackTrace()
             when (throwable) {
                 is TimeoutCancellationException -> {
-                    val code = 408 // timeout error code
-                    ResultWrapper.GenericError(code)
+                    ResultWrapper.GenericError(messagType = SnackBar(NetworkCodes.TIMEOUT_ERROR))
                 }
                 is IOException -> {
-                    ResultWrapper.GenericError(0)
+                    ResultWrapper.GenericError(
+                        SnackBar(NetworkCodes.CONNECTION_ERROR)
+                    )
                 }
                 is HttpException -> {
                     val code = throwable.code()
-                    val errorResponse = convertErrorBody(throwable)
                     ResultWrapper.GenericError(
-                        code,
-                        errorResponse
+                        SnackBar(code)
                     )
                 }
                 else -> {
                     ResultWrapper.GenericError(
-                        null
+                        Dialog(GENERAL_ERROR)
                     )
                 }
             }
@@ -54,6 +59,8 @@ suspend fun <T> safeApiCall(
         }
     }
 }
+
+
 
 
 //for custom error body
@@ -70,3 +77,4 @@ private fun convertErrorBody(throwable: HttpException): String? {
         return ""
     }
 }
+

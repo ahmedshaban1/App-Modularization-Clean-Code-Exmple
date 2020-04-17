@@ -2,6 +2,7 @@ package com.example.home.presenter
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.home.R
 import com.example.home.data.HomeSection
@@ -25,8 +26,9 @@ class HomeAdapter(var list: MutableList<HomeSection> = mutableListOf(), viewMode
         private val binding = HomeAdapterItemBinding.bind(itemView)
         fun bind(section: HomeSection) {
             binding.section = section
-            homeInnerAdapter = HomeInnerAdapter(HomeSection(title = section.title,viewType = section.viewType))
+            homeInnerAdapter = HomeInnerAdapter()
             itemView.sectionsRv.apply {
+                layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
                 adapter = homeInnerAdapter
             }
         }

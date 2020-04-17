@@ -20,6 +20,7 @@ fun DependencyHandler.addTestDependencies() {
 fun DependencyHandler.commonDevelopmentDependencies() {
     api(LibraryDependency.APPCOMPAT)
     api(LibraryDependency.CONSTRAINT)
+    api(LibraryDependency.MATERIAL)
     api(LibraryDependency.PICASSO)
     api(LibraryDependency.ROUNDED_IMAGE_VIEW)
     api(LibraryDependency.RECYCLERVIEW)

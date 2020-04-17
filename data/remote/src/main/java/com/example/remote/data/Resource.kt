@@ -1,6 +1,8 @@
 package com.example.remote.data
 
-data class Resource<out T>(val status: Status, val data: T?, val error: Throwable?) {
+import com.example.common.MessageType
+
+data class Resource<out T>(val status: Status, val data: T?, val messageType: MessageType?) {
     companion object {
         fun <T> success(data: T?): Resource<T> {
             return Resource(
@@ -10,7 +12,7 @@ data class Resource<out T>(val status: Status, val data: T?, val error: Throwabl
             )
         }
 
-        fun <T> error(error: Throwable, data: T?): Resource<T> {
+        fun <T> error(error: MessageType, data: T?): Resource<T> {
             return Resource(
                 Status.ERROR,
                 data,
