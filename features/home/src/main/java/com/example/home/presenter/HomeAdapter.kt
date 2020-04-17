@@ -10,8 +10,10 @@ import com.example.home.databinding.HomeAdapterItemBinding
 import com.example.uicomponents.helpers.inflate
 import kotlinx.android.synthetic.main.home_adapter_item.view.*
 
-class HomeAdapter(var list: MutableList<HomeSection> = mutableListOf(), viewModel: HomeViewModel) :
+class HomeAdapter( viewModel: HomeViewModel) :
     RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
+
+    var list: MutableList<HomeSection> = mutableListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         HomeViewHolder(parent.inflate(R.layout.home_adapter_item))
 
@@ -26,7 +28,7 @@ class HomeAdapter(var list: MutableList<HomeSection> = mutableListOf(), viewMode
         private val binding = HomeAdapterItemBinding.bind(itemView)
         fun bind(section: HomeSection) {
             binding.section = section
-            homeInnerAdapter = HomeInnerAdapter()
+            homeInnerAdapter = HomeInnerAdapter(section)
             itemView.sectionsRv.apply {
                 layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
                 adapter = homeInnerAdapter
@@ -34,9 +36,8 @@ class HomeAdapter(var list: MutableList<HomeSection> = mutableListOf(), viewMode
         }
     }
 
-    fun updateList(listUpdate: List<HomeSection>) {
-        list.clear()
-        list.addAll(listUpdate)
+    fun updateList(listUpdate: MutableList<HomeSection>) {
+        list = listUpdate
         notifyDataSetChanged()
 
     }

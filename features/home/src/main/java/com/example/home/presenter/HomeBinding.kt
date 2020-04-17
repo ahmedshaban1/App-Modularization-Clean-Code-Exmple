@@ -13,18 +13,11 @@ object HomeBinding {
     @JvmStatic
     fun setItems(recyclerView: RecyclerView, resource: Resource<List<HomeSection>>?) {
         with(recyclerView.adapter as HomeAdapter) {
-            resource?.data?.let { updateList(it) }
+            resource?.data?.let { updateList(it.toMutableList()) }
         }
     }
 
 
-    @BindingAdapter("app:items")
-    @JvmStatic
-    fun setItems(recyclerView: RecyclerView, resource: HomeSection?) {
-        with(recyclerView.adapter as HomeInnerAdapter) {
-            resource?.let { updateSection(it) }
-        }
-    }
 
 
     @BindingAdapter("app:showWhenLoading")
