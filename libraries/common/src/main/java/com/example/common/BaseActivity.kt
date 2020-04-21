@@ -1,13 +1,15 @@
 package com.example.common
 
+import android.app.ProgressDialog
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 
-abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
+abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity(),UiCommunicator {
 
     private lateinit var currentViewBinding: B
+    private var progress: ProgressDialog? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         currentViewBinding = DataBindingUtil.setContentView(this, layoutId) as B
@@ -15,25 +17,26 @@ abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
     }
 
 
-    fun showLoading() {
-        //todo impl loading feature
-
+    override fun showLoading() {
+        progress?.dismiss() ?: kotlin.run {
+            progress = ProgressDialog(this)
+        }
+        progress?.show()
     }
 
-    fun hideLoading() {
-        //todo impl hide loading feature
+    override fun hideLoading() {
+        progress?.dismiss()
     }
 
-    fun handleMessages(messageType:MessageType){
-        val message   =  ErrorMessageHelper.getMessage(messageType.code)
-        when(messageType){
-            is MessageType.SnackBar->{
+    override fun handleMessages(messageType: MessageType) {
+        val message = ErrorMessageHelper.getMessage(messageType.code)
+        when (messageType) {
+            is MessageType.SnackBar -> {
                 showSnackbar(message)
             }
         }
 
     }
-
 
 
     //all of this function needs future impl

@@ -7,6 +7,7 @@ dependencies {
     commonDevelopmentDependencies()
     implementation(project(FeaturesDependency.Splash))
     implementation(project(FeaturesDependency.Home))
+    implementation(project(FeaturesDependency.Auth))
     implementation(project(ModulesDependency.REMOTE))
     implementation(project(ModulesDependency.LOCAL))
     implementation(project(ModulesDependency.MODEL))
