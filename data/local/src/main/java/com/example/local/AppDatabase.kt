@@ -10,8 +10,9 @@ import com.example.local.dao.ProductDao
 import com.example.model.BlogPostApi
 import com.example.model.Category
 import com.example.model.Product
+import com.example.model.User
 
-@Database(entities = [BlogPostApi::class,Category::class,Product::class], version = 1, exportSchema = false)
+@Database(entities = [BlogPostApi::class,Category::class,Product::class,User::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun blogPostDao(): BlogPostDao
     abstract fun categoryDao(): CategoryDao

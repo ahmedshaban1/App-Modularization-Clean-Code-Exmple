@@ -10,12 +10,12 @@ import com.example.remote.data.Resource
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val userCase: GetHomeUserCase) : ViewModel() {
+class HomeViewModel(private val useCase: GetHomeUserCase) : ViewModel() {
     private val _homeSections = MutableLiveData<Resource<List<HomeSection>>>()
     val homeSectionsLD: LiveData<Resource<List<HomeSection>>> get() = _homeSections
     fun gethome() {
         viewModelScope.launch {
-            userCase.invoke().collect { data ->
+            useCase.invoke().collect { data ->
                 _homeSections.value = data
             }
         }
