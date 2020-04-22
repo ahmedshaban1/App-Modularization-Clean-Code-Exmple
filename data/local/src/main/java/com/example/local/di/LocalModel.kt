@@ -10,5 +10,6 @@ val localModule = module {
     factory { get<AppDatabase>().blogPostDao() }
     factory { get<AppDatabase>().productDao() }
     factory { get<AppDatabase>().categoryDao() }
+    factory { get<AppDatabase>().userDao() }
 
 }

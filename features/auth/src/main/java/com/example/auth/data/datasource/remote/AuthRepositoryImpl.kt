@@ -42,7 +42,7 @@ class AuthRepositoryImpl(private val remote: AuthRemote, private val local: Auth
             override suspend fun remoteFetch(): User {
                 return remote.register(JsonObject().apply {
                     addProperty("email", email)
-                    addProperty("username", username)
+                    addProperty("name", username)
                     addProperty("password", password)
                 })
             }

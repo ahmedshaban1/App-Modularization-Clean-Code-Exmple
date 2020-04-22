@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.dao.BlogPostDao
 import com.example.local.dao.CategoryDao
 import com.example.local.dao.ProductDao
+import com.example.local.dao.UserDao
 import com.example.model.BlogPostApi
 import com.example.model.Category
 import com.example.model.Product
@@ -17,6 +18,8 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun blogPostDao(): BlogPostDao
     abstract fun categoryDao(): CategoryDao
     abstract fun productDao(): ProductDao
+    abstract fun userDao(): UserDao
+
 
     companion object {
         fun buildDatabase(context: Context) =

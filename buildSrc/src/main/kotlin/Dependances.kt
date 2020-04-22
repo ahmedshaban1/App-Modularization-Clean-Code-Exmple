@@ -31,7 +31,7 @@ object BuildTypeRelease : BuildType {
 
 object CoreVersion {
     const val KOTLIN = "1.3.70"
-    const val NAVIGATION = "2.2.0"
+    const val NAVIGATION = "2.2.0-rc03"
     const val ANDROID_GRADLE = "3.5.3"
     const val KTLINT_GRADLE = "9.2.1"
     const val KTLINT = "0.34.2"
