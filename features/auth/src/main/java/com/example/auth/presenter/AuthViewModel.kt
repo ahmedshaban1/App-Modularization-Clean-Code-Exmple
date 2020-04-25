@@ -34,7 +34,7 @@ class AuthViewModel(
     fun login(email: String, password: String) {
         viewModelScope.launch {
             loginUseCase.invoke(email, password).collect { data ->
-                _userRegister.value = data
+                _userLogin.value = data
             }
         }
 

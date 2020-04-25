@@ -11,8 +11,6 @@ data class User(@SerializedName("updated_at")
                 val name: String = "",
                 @SerializedName("created_at")
                 val createdAt: String = "",
-                @SerializedName("email_verified_at")
-                val emailVerifiedAt: String = "",
                 @PrimaryKey
                 @SerializedName("id")
                 val id: Int = 0,

@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.auth.R
 import com.example.auth.presenter.AuthViewModel
+import com.example.common.BaseFragment
 import com.example.common.UiCommunicator
 import com.example.common.showSnackbar
 import com.example.remote.data.Resource
@@ -22,10 +23,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 /**
  * A simple [Fragment] subclass.
  */
-class RegisterFragment : Fragment(R.layout.fragment_resgister) {
+class RegisterFragment : BaseFragment(R.layout.fragment_resgister) {
 
     private val viewModel: AuthViewModel by viewModel()
-    private var uiCommunicator: UiCommunicator? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -60,13 +60,5 @@ class RegisterFragment : Fragment(R.layout.fragment_resgister) {
 
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is UiCommunicator) {
-            uiCommunicator = context
-        } else {
-            throw Exception("you must implement uiCommunicator listener ")
-        }
-    }
 
 }

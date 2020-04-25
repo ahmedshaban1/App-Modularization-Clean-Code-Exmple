@@ -13,7 +13,7 @@ import com.example.model.Category
 import com.example.model.Product
 import com.example.model.User
 
-@Database(entities = [BlogPostApi::class,Category::class,Product::class,User::class], version = 1, exportSchema = false)
+@Database(entities = [BlogPostApi::class,Category::class,Product::class,User::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun blogPostDao(): BlogPostDao
     abstract fun categoryDao(): CategoryDao

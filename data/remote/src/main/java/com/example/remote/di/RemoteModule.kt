@@ -1,5 +1,6 @@
 package com.example.remote.di
 
+import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -12,8 +13,15 @@ fun getRemoteModule(baseUrl: String) = module {
     single {
         Retrofit.Builder().client(get()).baseUrl(baseUrl)
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(get()))
             .build()
+    }
+
+
+    factory {
+         GsonBuilder()
+            .setLenient()
+            .create();
     }
 
 
