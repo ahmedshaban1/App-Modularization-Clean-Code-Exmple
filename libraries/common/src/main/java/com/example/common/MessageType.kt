@@ -1,8 +1,8 @@
 package com.example.common
 
-sealed class MessageType(var code:Int){
-    class SnackBar(code:Int) : MessageType(code)
-    class Dialog(code:Int) : MessageType(code)
-    class Toast(code:Int): MessageType(code)
-    class None(code:Int): MessageType(code)
+sealed class MessageType(var code:Int,var message:String? = null){
+    class SnackBar(code:Int, message:String? = null) : MessageType(code,message)
+    class Dialog(code:Int,message:String? = null) : MessageType(code,message)
+    class Toast(code:Int,message:String? = null): MessageType(code,message)
+    class None(code:Int,message:String? = null): MessageType(code,message)
 }

@@ -31,7 +31,7 @@ abstract class NetworkBoundResource<T> {
                 }
 
                 is ResultWrapper.GenericError -> {
-                    emit(Resource.error(data = null, error = results.messagType))
+                    emit(Resource.error(data = null, error = results.messageType))
                 }
             }
         } else {

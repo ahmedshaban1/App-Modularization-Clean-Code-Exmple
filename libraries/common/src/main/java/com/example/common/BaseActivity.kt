@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 
-abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity(),UiCommunicator {
+abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity(), UiCommunicator {
 
     private lateinit var currentViewBinding: B
     private var progress: ProgressDialog? = null
@@ -29,7 +29,8 @@ abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity(),UiCommuni
     }
 
     override fun handleMessages(messageType: MessageType) {
-        val message = ErrorMessageHelper.getMessage(messageType.code)
+        var message = ErrorMessageHelper.getMessage(messageType.code)
+        messageType.message?.let { message = it }
         when (messageType) {
             is MessageType.SnackBar -> {
                 showSnackbar(message)

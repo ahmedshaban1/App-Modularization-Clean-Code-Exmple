@@ -17,11 +17,8 @@ import java.io.IOException
 
 sealed class ResultWrapper<out T> {
     data class Success<out T>(val value: T) : ResultWrapper<T>()
-    data class GenericError(val messagType: MessageType) : ResultWrapper<Nothing>()
+    data class GenericError(val messageType: MessageType) : ResultWrapper<Nothing>()
 }
-
-
-
 
 
 suspend fun <T> safeApiCall(
@@ -36,7 +33,7 @@ suspend fun <T> safeApiCall(
             throwable.printStackTrace()
             when (throwable) {
                 is TimeoutCancellationException -> {
-                    ResultWrapper.GenericError(messagType = SnackBar(NetworkCodes.TIMEOUT_ERROR))
+                    ResultWrapper.GenericError(messageType = SnackBar(NetworkCodes.TIMEOUT_ERROR))
                 }
                 is IOException -> {
                     ResultWrapper.GenericError(
@@ -46,7 +43,7 @@ suspend fun <T> safeApiCall(
                 is HttpException -> {
                     val code = throwable.code()
                     ResultWrapper.GenericError(
-                        SnackBar(code)
+                        SnackBar(code, message = convertErrorBody(throwable))
                     )
                 }
                 else -> {
@@ -61,20 +58,20 @@ suspend fun <T> safeApiCall(
 }
 
 
-
-
 //for custom error body
 private fun convertErrorBody(throwable: HttpException): String? {
     try {
         val json = JSONTokener(throwable.response()?.errorBody()?.string()).nextValue();
         if (json is JSONObject || json is JSONArray) {
-            val errorResponse = Gson().fromJson(json.toString(), String::class.java)
-            errorResponse?.let { return it }
+            val errorResponse = Gson().fromJson(json.toString(), ErrorResponse::class.java)
+            errorResponse?.let { return it.message }
         }
-        return ""
+        return null
 
     } catch (exception: Exception) {
-        return ""
+        return null
     }
 }
+
+class ErrorResponse(val message: String? = "")
 
